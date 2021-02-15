@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryDarkColor"
+    android:background="@color/white"
     tools:context=".SplashScreen">
 <ImageView
     android:id="@+id/splashImage"
@@ -11,6 +11,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:foregroundGravity="center"
-    android:src="@drawable/eduicon"/>
+    android:src="@drawable/log"/>
 
 </FrameLayout>
