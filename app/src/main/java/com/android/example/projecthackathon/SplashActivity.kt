@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
@@ -33,7 +32,7 @@ class SplashActivity : AppCompatActivity() {
         imageView.animation = AnimationUtils.loadAnimation(this, R.anim.splash_anim)
 
         newHandler.postDelayed({
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, SignInUpActivity::class.java))
                 finish()
         }, DELAY.toLong())
 
