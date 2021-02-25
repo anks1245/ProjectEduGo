@@ -12,15 +12,23 @@ import com.smarteist.autoimageslider.SliderView
 
 class HomeFragment : Fragment() {
 
-    private lateinit var sliderLayout: SliderLayout
+    private lateinit var sliderLayout1: SliderLayout
+    private lateinit var sliderLayout2: SliderLayout
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        sliderLayout = view.findViewById(R.id.imageSlider)
-        sliderLayout.setIndicatorAnimation(SliderLayout.Animations.WORM)
-        sliderLayout.scrollTimeInSec = 1
+
+        sliderLayout1 = view.findViewById(R.id.imageSlider1)
+        sliderLayout1.setIndicatorAnimation(SliderLayout.Animations.WORM)
+        sliderLayout1.scrollTimeInSec = 1
+
+        sliderLayout2 = view.findViewById(R.id.imageSlider2)
+        sliderLayout2.setIndicatorAnimation(SliderLayout.Animations.WORM)
+        sliderLayout2.scrollTimeInSec = 1
+
         setSliderViews()
         // Inflate the layout for this fragment
         return view
@@ -30,10 +38,15 @@ class HomeFragment : Fragment() {
 
         val resources = listOf(R.drawable.ic_home, R.drawable.ic_job, R.drawable.ic_message)
         for (i in resources) {
-            val sliderView = SliderView(context)
+            val sliderView1 = SliderView(context)
+            val sliderView2 = SliderView(context)
+
             //sliderView.setImageDrawable(i)
-            sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-            sliderLayout.addSliderView(sliderView)
+            sliderView1.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+            sliderView2.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+
+            sliderLayout1.addSliderView(sliderView1)
+            sliderLayout2.addSliderView(sliderView2)
         }
     }
 }
