@@ -18,4 +18,8 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="login">LOGIN</string>
+    <string name="sign_up">SIGNUP</string>
+    <string name="register">Register</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="name">Name</string>
 </resources>
