@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/courseFragment"
+        android:title="View Courses" />
+    <item
+        android:id="@+id/jobsFragment"
+        android:icon="@drawable/ic_job"
+        android:title="Jobs &amp; Internship" />
+    <item
+        android:id="@+id/mentorFragment"
+        android:title="Ask our Mentors" />
+    <item
+        android:id="@+id/eduSpaceFragment"
+        android:title="EduSpace &amp; Resume" />
+    <item
+        android:id="@+id/discFragment"
+        android:icon="@drawable/ic_message"
+        android:title="Join Global Discussion" />
+    <item
+        android:id="@+id/signFragment"
+        android:icon="@drawable/ic_password"
+        android:title="Sign Out" />
+</menu>
