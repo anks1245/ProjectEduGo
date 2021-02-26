@@ -6,4 +6,5 @@
     <color name="primaryLightColor">#ff6f60</color>
     <color name="primaryDarkColor">#ab000d</color>
     <color name="active">#48AF2E</color>
+    <color name="jobsItemColor">#DEDEDE</color>
 </resources>
