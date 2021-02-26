@@ -24,11 +24,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Infosys"/>
+
             <TextView
-                android:padding="2dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Android Developer"/>
+                android:layout_height="23dp"
+                android:padding="2dp"
+                android:text="Android Developer" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
