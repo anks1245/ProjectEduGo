@@ -21,7 +21,7 @@ class SplashScreen : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
-        setContentView(R.layout.activity_splash_screen)
+        setContentView(R.layout.activity_splash)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         //setting animation
         val imageView: ImageView = findViewById(R.id.splashImage)
