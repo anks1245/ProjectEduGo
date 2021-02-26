@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import com.android.example.projecthackathon.R
 import com.smarteist.autoimageslider.SliderLayout
 import com.smarteist.autoimageslider.SliderView
 
 class HomeFragment : Fragment() {
 
-    private lateinit var sliderLayout1: SliderLayout
-    private lateinit var sliderLayout2: SliderLayout
+    private lateinit var sliderLayout: SliderLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,32 +21,40 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        sliderLayout1 = view.findViewById(R.id.imageSlider1)
-        sliderLayout1.setIndicatorAnimation(SliderLayout.Animations.WORM)
-        sliderLayout1.scrollTimeInSec = 1
+        //setSliderViewsOn1(view)
+        setSliderViewsOn2(view)
 
-        sliderLayout2 = view.findViewById(R.id.imageSlider2)
-        sliderLayout2.setIndicatorAnimation(SliderLayout.Animations.WORM)
-        sliderLayout2.scrollTimeInSec = 1
-
-        setSliderViews()
         // Inflate the layout for this fragment
         return view
     }
 
-    private fun setSliderViews() {
+    private fun setSliderViewsOn1(view: View){
 
-        val resources = listOf(R.drawable.ic_home, R.drawable.ic_job, R.drawable.ic_message)
-        for (i in resources) {
-            val sliderView1 = SliderView(context)
-            val sliderView2 = SliderView(context)
+        sliderLayout = view.findViewById(R.id.imageSlider2)
+        sliderLayout.setIndicatorAnimation(SliderLayout.Animations.SWAP)
+        sliderLayout.scrollTimeInSec = 1
+
+        for (i in 1..3) {
+            val sliderView = SliderView(context)
 
             //sliderView.setImageDrawable(i)
-            sliderView1.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-            sliderView2.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+            sliderView.setImageScaleType(ImageView.ScaleType.CENTER)
+            sliderLayout.addSliderView(sliderView)
+        }
+    }
 
-            sliderLayout1.addSliderView(sliderView1)
-            sliderLayout2.addSliderView(sliderView2)
+    private fun setSliderViewsOn2(view: View){
+
+        sliderLayout = view.findViewById(R.id.imageSlider2)
+        sliderLayout.setIndicatorAnimation(SliderLayout.Animations.SWAP)
+        sliderLayout.scrollTimeInSec = 1
+
+        for (i in 1..3) {
+            val sliderView = SliderView(context)
+
+            //sliderView.setImageDrawable(i)
+            sliderView.setImageScaleType(ImageView.ScaleType.CENTER)
+            sliderLayout.addSliderView(sliderView)
         }
     }
 }
