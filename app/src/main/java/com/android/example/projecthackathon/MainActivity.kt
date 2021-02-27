@@ -4,11 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.android.example.projecthackathon.home.HomeFragment
+import com.android.example.projecthackathon.home.HomeFragmentDirections
 import com.android.example.projecthackathon.job.JobFragment
 import com.android.example.projecthackathon.message.MessageFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val messageFragment = MessageFragment()
 
 
-//        drawerLayout = findViewById(R.id.drawerLayout)
+        drawerLayout = findViewById(R.id.drawerLayout)
 //        val navHostFragment =
 //            supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
 //        val navController: NavController = navHostFragment.navController
@@ -41,12 +45,11 @@ class MainActivity : AppCompatActivity() {
         setCurrentFragment(homeFragment)
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> setCurrentFragment(homeFragment)
-                R.id.job -> setCurrentFragment(jobFragment)
-                R.id.message -> setCurrentFragment(messageFragment)
-
-            }
+                when (it.itemId) {
+                    R.id.home -> setCurrentFragment(homeFragment)
+                    R.id.job -> setCurrentFragment(jobFragment)
+                    R.id.message -> setCurrentFragment(messageFragment)
+                }
             true
         }
 
@@ -58,8 +61,8 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
 
-//    override fun onSupportNavigateUp(): Boolean {
-//        val navController = this.findNavController(R.id.myNavHostFragment)
-//        return NavigationUI.navigateUp(navController, drawerLayout)
-//    }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.myNavHostFragment)
+        return NavigationUI.navigateUp(navController, drawerLayout)
+    }
 }

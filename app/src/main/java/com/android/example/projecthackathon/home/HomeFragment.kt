@@ -1,13 +1,16 @@
 package com.android.example.projecthackathon.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.android.example.projecthackathon.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.smarteist.autoimageslider.SliderLayout
 import com.smarteist.autoimageslider.SliderView
 
@@ -24,11 +27,11 @@ class HomeFragment : Fragment() {
         //setSliderViewsOn1(view)
         setSliderViewsOn2(view)
 
-        // Inflate the layout for this fragment
         return view
     }
 
-    private fun setSliderViewsOn1(view: View){
+
+    private fun setSliderViewsOn1(view: View) {
 
         sliderLayout = view.findViewById(R.id.imageSlider2)
         sliderLayout.setIndicatorAnimation(SliderLayout.Animations.SWAP)
@@ -43,7 +46,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setSliderViewsOn2(view: View){
+    private fun setSliderViewsOn2(view: View) {
 
         sliderLayout = view.findViewById(R.id.imageSlider2)
         sliderLayout.setIndicatorAnimation(SliderLayout.Animations.SWAP)
