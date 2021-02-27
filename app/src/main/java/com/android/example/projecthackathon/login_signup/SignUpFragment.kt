@@ -8,20 +8,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import com.android.example.projecthackathon.MainActivity
 import com.android.example.projecthackathon.R
-import com.android.example.projecthackathon.databinding.FragmentLoginBinding
 import com.android.example.projecthackathon.databinding.FragmentSignUpBinding
+import com.android.example.projecthackathon.helper.User
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.core.Context
 
 class SignUpFragment : Fragment() {
 
-    lateinit var database: FirebaseDatabase
+    private lateinit var database: FirebaseDatabase
+
+    lateinit var name: String
+    lateinit var email: String
+    lateinit var pass: String
+    private var uType: Int = R.id.seeker
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,19 +39,17 @@ class SignUpFragment : Fragment() {
 
         database = FirebaseDatabase.getInstance()
 
-        binding.register.setOnClickListener{
+        binding.register.setOnClickListener {
 
-            val name = binding.name.editText?.text.toString()
-            val email = binding.username.editText?.text.toString()
-            val pass = binding.password.editText?.text.toString()
-            val confirmPass = binding.confirmPassword.editText?.text.toString()
-            val uType = binding.uType.checkedRadioButtonId
+            name = binding.name.editText?.text.toString()
+            email = binding.username.editText?.text.toString()
+            pass = binding.password.editText?.text.toString()
+
+            uType = binding.uType.checkedRadioButtonId
 
             validateName(binding)
             validateUserName(binding)
             validatePassword(binding)
-            validateConfirmPassword(binding)
-            validateUType(binding)
 
 
             binding.username.editText?.addTextChangedListener(object : TextWatcher {
@@ -77,36 +82,48 @@ class SignUpFragment : Fragment() {
 
                 override fun afterTextChanged(s: Editable) {}
             })
+            binding.name.editText?.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
-            if (validateUserName(binding) && validatePassword(binding))
-                checkUserExists(email)
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    validateName(binding)
+                }
+
+                override fun afterTextChanged(s: Editable) {}
+            })
+
+            if (validateUserName(binding) && validatePassword(binding) && validatePassword(binding))
+                createAccount()
         }
         return binding.root
     }
 
-    private fun checkUserExists(email: String) {
-        val databaseReference = database.reference.child("users")
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val post = snapshot.value
-                if (post == null) {
-                    Toast.makeText(
-                        context,
-                        "User does not exist, Register here!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    //findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
-                } else {
-                    startActivity(Intent(context, MainActivity::class.java))
-                }
+    private fun createAccount() {
+        val databaseReference = database.reference.child("users").child(email.replace("@gmail.com","", true))
+        val user = User(
+            name, pass, email, when (uType) {
+                R.id.seeker -> "seeker"
+                else -> "employer"
             }
+        )
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
+        databaseReference.setValue(user).addOnSuccessListener(OnSuccessListener {
+            Toast.makeText(context, "Account created", Toast.LENGTH_SHORT).show()
+            val sharedPreferences = context?.getSharedPreferences("user", android.content.Context.MODE_PRIVATE)
+            val editor = sharedPreferences?.edit()
+            editor?.putString("userKey", email)
+            editor?.putString("emailKey", email)
+            editor?.putString("passKey", pass)
+            editor?.apply()
 
-        }
-
+            startActivity(Intent(context, MainActivity::class.java))
+        })
     }
 
     private fun validateName(binding: FragmentSignUpBinding): Boolean {
@@ -142,21 +159,4 @@ class SignUpFragment : Fragment() {
         return true
     }
 
-
-    private fun validateConfirmPassword(binding: FragmentSignUpBinding): Boolean {
-        if (binding.confirmPassword.editText?.text.toString().isEmpty()) {
-            binding.confirmPassword.error = "This field cannot be empty"
-            return false
-        } else if (binding.confirmPassword.editText!!.text != binding.password.editText!!.text) {
-            binding.confirmPassword.error = "Password does not match"
-            return false
-        }
-        binding.confirmPassword.error = null
-        binding.confirmPassword.isErrorEnabled = false
-        return true
-    }
-
-    private fun validateUType(binding: FragmentSignUpBinding) {
-
-    }
 }

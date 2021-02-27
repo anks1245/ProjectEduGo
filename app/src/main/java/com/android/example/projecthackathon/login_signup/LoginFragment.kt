@@ -1,6 +1,7 @@
 package com.android.example.projecthackathon.login_signup
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.NavGraph
+import androidx.navigation.NavHostController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.android.example.projecthackathon.MainActivity
 import com.android.example.projecthackathon.databinding.FragmentLoginBinding
@@ -68,23 +74,36 @@ class LoginFragment : Fragment() {
 
             if (validateUserName(binding) && validatePassword(binding)) {
                 binding.loader.visibility = View.VISIBLE
-                checkUserExists(email)
+                checkUserExists(email,pass, binding)
             }
         }
         return binding.root
     }
 
-    private fun checkUserExists(email: String) {
+    private fun checkUserExists(email: String, pass: String, binding: FragmentLoginBinding) {
         val databaseReference = database.reference.child("users")
+
         val postListener = object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val post = snapshot.value
-                if(post == null) {
-                    Toast.makeText(context, "User does not exist, Register here!", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
-                } else {
-                    startActivity(Intent(context, MainActivity::class.java))
-                }
+                    val post = snapshot.value
+                    if (post == null) {
+                        Toast.makeText(context, "User does not exist, Register here!", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
+                    } else {
+                        binding.loader.visibility = View.GONE
+                        val sharedPreferences = context?.getSharedPreferences("user", android.content.Context.MODE_PRIVATE)
+                        if (email == sharedPreferences?.getString("userKey", null) && pass == sharedPreferences.getString("passKey", null)) {
+                            startActivity(Intent(context, MainActivity::class.java))
+                            sharedPreferences.edit().putString("emailKey", email).apply()
+                            Toast.makeText(context, "Logged In", Toast.LENGTH_SHORT).show()
+                        }
+                        else {
+                            if (findNavController().currentDestination!!.id == 2131362049) {
+                                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
+                                Toast.makeText(context, "User does not exist, Register here!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
             }
 
             override fun onCancelled(error: DatabaseError) {

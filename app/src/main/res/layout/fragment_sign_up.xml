@@ -14,8 +14,8 @@
             android:id="@+id/materialCardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="150dp"
-            android:layout_marginBottom="150dp"
+            android:layout_marginTop="160dp"
+            android:layout_marginBottom="160dp"
             android:backgroundTint="@color/white"
             android:elevation="20dp"
             app:cardCornerRadius="12dp"
@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/primaryLightColor"
                         android:hint="@string/name"
-                        android:inputType="text"
+                        android:inputType="textCapWords"
                         android:selectAllOnFocus="true"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -95,30 +95,6 @@
                         android:autofillHints="@string/prompt_password"
                         android:hint="@string/prompt_password"
                         android:inputType="textPassword"
-                        android:imeOptions="actionNext"
-                        android:selectAllOnFocus="true"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/confirmPassword"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    app:startIconDrawable="@drawable/ic_password"
-                    android:textColorHint="@color/primaryColor"
-                    app:endIconTint="@color/primaryColor"
-                    app:boxStrokeColor="@color/primaryColor"
-                    app:endIconMode="password_toggle">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/primaryLightColor"
-                        android:autofillHints="@string/prompt_password"
-                        android:hint="@string/confirm_password"
-                        android:inputType="textPassword"
                         android:imeOptions="actionDone"
                         android:selectAllOnFocus="true"/>
 
@@ -146,6 +122,7 @@
                             android:id="@+id/seeker"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:checked="true"
                             android:textColor="@color/primaryColor"
                             android:text="Seeker"/>
                         <RadioButton
