@@ -48,7 +48,20 @@ class JobFragment : Fragment() {
     private fun convertJson(response : String?) {
         val jsonArray = JSONArray(response)
         for( i in 0 until jsonArray.length()){
+            jsonArray.getJSONObject(i).apply {
+                val companyName = getString("company_name")
+                val jobName = getString("job_name")
+                val uName = getString("job_uploaded_by")
+                val jobImage = getString("job_image")
+                val jobDesc = getString("job_desc")
+                val jobValid = getString("job_valid")
+                val jobType = getString("job_type")
+                val jobLike = getString("job_like")
+                val jobApplied = getString("job_applied")
+                val jobUploadedAt = getString("job_uploaded_at")
+                context?.toast(companyName+"\n"+jobName)
 
+            }
         }
     }
 }
