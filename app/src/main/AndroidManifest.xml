@@ -11,7 +11,7 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme">
-        <activity android:name=".MentorAppointment"></activity>
+        <activity android:name=".MentorAppointment"/>
         <activity android:name=".mentor.MentorActivity" />
         <activity android:name=".course.CourseFullActivity" />
         <activity android:name=".job.JobFullDescription" />
@@ -19,7 +19,7 @@
         <activity android:name=".course.CourseActivity" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.ProjectHackathon" />
+            android:theme="@style/Theme.Main" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
