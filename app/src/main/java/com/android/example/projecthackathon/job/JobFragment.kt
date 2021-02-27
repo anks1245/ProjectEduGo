@@ -5,15 +5,50 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.example.projecthackathon.R
+import com.android.example.projecthackathon.helper.GET_COURSE_IMAGE
+import com.android.example.projecthackathon.helper.GET_MENTORS
+import com.android.example.projecthackathon.helper.toast
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import org.json.JSONArray
 
 class JobFragment : Fragment() {
-
+    lateinit var root: View
+    private lateinit var recyclerView : RecyclerView
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var requestQueue: RequestQueue
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_job, container, false)
+        root = inflater.inflate(R.layout.fragment_job, container, false)
+        recyclerView = root.findViewById(R.id.recyclerview_jobpost)
+        swipeRefreshLayout = root.findViewById(R.id.swipetorefresh_job)
+        requestQueue = Volley.newRequestQueue(root?.context)
+        getJobPost()
+        return root
+    }
+
+    private fun getJobPost() {
+        val stringRequest = StringRequest(Request.Method.POST, GET_MENTORS ,Response.Listener { response->
+            convertJson(response)
+        },Response.ErrorListener { error->
+            context?.toast(error.message.toString())
+        })
+        requestQueue.add(stringRequest)
+    }
+
+    private fun convertJson(response : String?) {
+        val jsonArray = JSONArray(response)
+        for( i in 0 until jsonArray.length()){
+
+        }
     }
 }
