@@ -8,14 +8,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
 import com.android.example.projecthackathon.MainActivity
 import com.android.example.projecthackathon.R
 import com.android.example.projecthackathon.databinding.FragmentSignUpBinding
 import com.android.example.projecthackathon.helper.User
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.core.Context
 
 class SignUpFragment : Fragment() {
 
@@ -101,16 +105,25 @@ class SignUpFragment : Fragment() {
     }
 
     private fun createAccount() {
-        val databaseReference = database.reference.child("users").child(email)
+        val databaseReference = database.reference.child("users").child(email.replace("@gmail.com","", true))
         val user = User(
             name, pass, email, when (uType) {
                 R.id.seeker -> "seeker"
                 else -> "employer"
             }
         )
-        //findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
 
-        startActivity(Intent(context, MainActivity::class.java))
+        databaseReference.setValue(user).addOnSuccessListener(OnSuccessListener {
+            Toast.makeText(context, "Account created", Toast.LENGTH_SHORT).show()
+            val sharedPreferences = context?.getSharedPreferences("user", android.content.Context.MODE_PRIVATE)
+            val editor = sharedPreferences?.edit()
+            editor?.putString("userKey", email)
+            editor?.putString("emailKey", email)
+            editor?.putString("passKey", pass)
+            editor?.apply()
+
+            startActivity(Intent(context, MainActivity::class.java))
+        })
     }
 
     private fun validateName(binding: FragmentSignUpBinding): Boolean {
