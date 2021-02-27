@@ -1,6 +1,8 @@
 package com.android.example.projecthackathon
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -9,7 +11,6 @@ import androidx.navigation.ui.NavigationUI
 import com.android.example.projecthackathon.home.HomeFragment
 import com.android.example.projecthackathon.job.JobFragment
 import com.android.example.projecthackathon.message.MessageFragment
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -53,6 +54,12 @@ class MainActivity : AppCompatActivity() {
                 }
             true
         }
+
+        val signImageView: ImageView = findViewById(R.id.power)
+        signImageView.setOnClickListener {
+            startActivity(Intent(this, SignInUpActivity ::class.java))
+        }
+
 
     }
 

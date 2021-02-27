@@ -29,7 +29,16 @@
                 android:backgroundTint="@color/primaryColor"
                 android:elevation="0dp"
                 app:navigationIcon="@drawable/ic_menu"
-                app:title="Aman" />
+                app:title="Aman" >
+                <ImageView
+                    android:id="@+id/power"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_power"
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="12dp"
+                    tools:ignore="RtlHardcoded" />
+            </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.fragment.app.FragmentContainerView
