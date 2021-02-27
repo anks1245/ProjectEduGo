@@ -32,7 +32,7 @@ class SplashActivity : AppCompatActivity() {
         imageView.animation = AnimationUtils.loadAnimation(this, R.anim.splash_anim)
 
         newHandler.postDelayed({
-                startActivity(Intent(this, SignInUpActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
         }, DELAY.toLong())
 

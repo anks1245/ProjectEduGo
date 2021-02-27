@@ -20,6 +20,7 @@
         <activity android:name=".course.CourseActivity" />
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.Main" />
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -28,7 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignInUpActivity" />
+        <activity android:name=".SignInUpActivity"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>
