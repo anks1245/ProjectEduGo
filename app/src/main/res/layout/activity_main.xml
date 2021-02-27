@@ -28,8 +28,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/primaryColor"
                 android:elevation="0dp"
-                app:navigationIcon="@drawable/ic_menu"
-                app:title="Aman" >
+                app:navigationIcon="@drawable/ic_menu">
                 <ImageView
                     android:id="@+id/power"
                     android:layout_width="wrap_content"
