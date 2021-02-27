@@ -17,7 +17,8 @@
         <activity android:name=".course.CourseFullActivity" />
         <activity android:name=".job.JobFullDescription" />
         <activity android:name=".job.JobsAndInternshipActivity" />
-        <activity android:name=".course.CourseActivity" />
+        <activity android:name=".course.CourseActivity"
+            android:theme="@style/Theme.ProjectHackathon"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
