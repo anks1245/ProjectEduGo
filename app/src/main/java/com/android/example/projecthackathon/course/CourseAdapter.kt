@@ -1,5 +1,6 @@
 package com.android.example.projecthackathon.course
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,13 @@ class CourseAdapter(private val courses : ArrayList<CourseModel>) : RecyclerView
 
         holder.itemView.setOnClickListener {
             Toast.makeText(it.context, courses[position].courseName , Toast.LENGTH_SHORT).show()
+            val intent = Intent(it.context,CourseFullActivity::class.java)
+            intent.putExtra("cName",courses[position].courseName)
+            intent.putExtra("cPrice",courses[position].coursePrice)
+            intent.putExtra("cImage",courses[position].courseImage)
+            intent.putExtra("cDesc",courses[position].courseDesc)
+
+            it.context.startActivity(intent)
         }
     }
 

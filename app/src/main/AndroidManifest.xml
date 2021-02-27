@@ -13,10 +13,12 @@
         android:theme="@style/SplashTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".MentorAppointment"/>
-        <activity android:name=".mentor.MentorActivity" />
+        <activity android:name=".mentor.MentorActivity"
+            android:theme="@style/Theme.ProjectHackathon"/>
         <activity android:name=".course.CourseFullActivity" />
         <activity android:name=".job.JobFullDescription" />
-        <activity android:name=".job.JobsAndInternshipActivity" />
+        <activity android:name=".job.JobsAndInternshipActivity"
+            android:theme="@style/Theme.ProjectHackathon"/>
         <activity android:name=".course.CourseActivity"
             android:theme="@style/Theme.ProjectHackathon"/>
         <activity

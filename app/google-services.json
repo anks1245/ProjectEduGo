@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "354686533920",
+    "project_id": "project-edugo",
+    "storage_bucket": "project-edugo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354686533920:android:c955a8e3c9baa8f06c5745",
+        "android_client_info": {
+          "package_name": "com.android.example.projecthackathon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354686533920-4vt21rskscbksktsqq59blmchp4hhnjc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvPsLl-dB23pqgaRA62uSwaPveBZWUfm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354686533920-4vt21rskscbksktsqq59blmchp4hhnjc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
