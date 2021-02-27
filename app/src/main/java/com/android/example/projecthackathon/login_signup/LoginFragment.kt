@@ -9,16 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.android.example.projecthackathon.MainActivity
 import com.android.example.projecthackathon.databinding.FragmentLoginBinding
 import com.google.firebase.database.*
-import com.google.firebase.storage.FirebaseStorage
 
 
 class LoginFragment : Fragment() {
 
     lateinit var database: FirebaseDatabase
-    lateinit var storage: FirebaseStorage
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +27,6 @@ class LoginFragment : Fragment() {
         val  binding = FragmentLoginBinding.inflate(inflater)
 
         database = FirebaseDatabase.getInstance()
-        storage = FirebaseStorage.getInstance()
 
         binding.login.setOnClickListener{
             val email: String = binding.username.editText?.text.toString()
@@ -68,11 +66,10 @@ class LoginFragment : Fragment() {
                 override fun afterTextChanged(s: Editable) {}
             })
 
-            checkUserExists(email)
-
-            //open the main activity
-            startActivity(Intent(context, MainActivity::class.java))
-            activity?.finish()
+            if (validateUserName(binding) && validatePassword(binding)) {
+                binding.loader.visibility = View.VISIBLE
+                checkUserExists(email)
+            }
         }
         return binding.root
     }
@@ -82,7 +79,12 @@ class LoginFragment : Fragment() {
         val postListener = object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val post = snapshot.value
-                Toast.makeText(context,""+post?.javaClass,Toast.LENGTH_SHORT).show()
+                if(post == null) {
+                    Toast.makeText(context, "User does not exist, Register here!", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
+                } else {
+                    startActivity(Intent(context, MainActivity::class.java))
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -95,23 +97,23 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun validatePassword(binding: FragmentLoginBinding) {
+    private fun validatePassword(binding: FragmentLoginBinding): Boolean {
         if (binding.password.editText?.text.toString().isEmpty()) {
             binding.password.error = "This field cannot be empty"
-            return
+            return false
         }
         binding.password.error = null
         binding.password.isErrorEnabled = false
-        return
+        return true
     }
-    private fun validateUserName(binding: FragmentLoginBinding) {
+    private fun validateUserName(binding: FragmentLoginBinding): Boolean {
         if (binding.username.editText?.text.toString().isEmpty()) {
             binding.username.error = "This field cannot be empty"
-            return
+            return false
         }
         binding.username.error = null
         binding.username.isErrorEnabled = false
-        return
+        return true
     }
 
 }
