@@ -14,8 +14,8 @@
             android:id="@+id/materialCardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="160dp"
-            android:layout_marginBottom="160dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginBottom="150dp"
             android:backgroundTint="@color/white"
             android:elevation="20dp"
             app:cardCornerRadius="12dp"
@@ -95,7 +95,7 @@
                         android:autofillHints="@string/prompt_password"
                         android:hint="@string/prompt_password"
                         android:inputType="textPassword"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
                         android:selectAllOnFocus="true"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -124,13 +124,48 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Spinner
-                    android:id="@+id/userTypeSpinner"
+                <LinearLayout
+                    android:layout_margin="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Type"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/primaryLightColor"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+                    <RadioGroup
+                        android:id="@+id/uType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="end">
+                        <RadioButton
+                            android:id="@+id/seeker"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primaryColor"
+                            android:text="Seeker"/>
+                        <RadioButton
+                            android:id="@+id/employer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primaryColor"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginStart="12dp"
+                            android:text="Employer"/>
+                    </RadioGroup>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/primaryLightColor"/>
 
                 <Button
-                    android:id="@+id/login"
+                    android:id="@+id/register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
