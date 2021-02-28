@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.example.projecthackathon.R
@@ -25,6 +26,8 @@ class JobFragment : Fragment() {
     private lateinit var recyclerView : RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var requestQueue: RequestQueue
+    private var jobArrayList : ArrayList<JobModel> = ArrayList()
+    private lateinit var jobAdapter: JobAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +37,12 @@ class JobFragment : Fragment() {
         recyclerView = root.findViewById(R.id.recyclerview_jobpost)
         swipeRefreshLayout = root.findViewById(R.id.swipetorefresh_job)
         requestQueue = Volley.newRequestQueue(root?.context)
-//        getJobPost()
+        getJobPost()
+        swipeRefreshLayout.setOnRefreshListener {
+            jobArrayList.clear()
+            getJobPost()
+            swipeRefreshLayout.isRefreshing = false
+        }
         return root
     }
 
@@ -66,7 +74,24 @@ class JobFragment : Fragment() {
                 val jobLike = getString("job_like")
                 val jobApplied = getString("job_applied")
                 val jobUploadedAt = getString("job_uploaded_at")
-
+                val mJob = JobModel(
+                    companyName,
+                    jobName,
+                    uName,
+                    jobImage,
+                    jobDesc,
+                    jobValid,
+                    jobType,
+                    jobLike,
+                    jobApplied,
+                    jobUploadedAt
+                )
+                jobArrayList.add(mJob)
+            }
+            jobAdapter = JobAdapter(jobArrayList)
+            recyclerView.apply {
+                layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+                adapter = jobAdapter
             }
         }
     }
