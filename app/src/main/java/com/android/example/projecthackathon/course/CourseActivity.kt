@@ -37,6 +37,7 @@ class CourseActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progress_bar)
         getCourse()
         swipeRefreshLayout.setOnRefreshListener {
+            courseArrayList.clear()
             getCourse()
             swipeRefreshLayout.isRefreshing = false
         }

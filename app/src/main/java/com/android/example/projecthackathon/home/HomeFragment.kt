@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.android.example.projecthackathon.R
 import com.android.example.projecthackathon.course.CourseActivity
+import com.android.example.projecthackathon.job.JobsAndInternshipActivity
+import com.android.example.projecthackathon.mentor.MentorActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.smarteist.autoimageslider.SliderLayout
 import com.smarteist.autoimageslider.SliderView
@@ -21,6 +23,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var sliderLayout: SliderLayout
     private var viewCourseTextView : TextView ?= null
+    private var askOurMentorTextView : TextView ?= null
+    private var jobsnInternshipTextView : TextView ?= null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,11 +33,22 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         //setSliderViewsOn1(view)
         setSliderViewsOn2(view)
+        jobsnInternshipTextView = view.findViewById(R.id.tv1)
         viewCourseTextView = view.findViewById(R.id.tv2)
-        viewCourseTextView?.setOnClickListener {
-            val intent = Intent(requireContext(),CourseActivity::class.java)
-            startActivity(intent)
+        askOurMentorTextView = view.findViewById(R.id.tv3)
+        jobsnInternshipTextView?.setOnClickListener {
+            val intent1 = Intent(requireContext(),JobsAndInternshipActivity::class.java)
+            startActivity(intent1)
         }
+        viewCourseTextView?.setOnClickListener {
+            val intent2 = Intent(requireContext(),CourseActivity::class.java)
+            startActivity(intent2)
+        }
+        askOurMentorTextView?.setOnClickListener { 
+            val intent3 = Intent(requireContext(),MentorActivity::class.java)
+            startActivity(intent3)
+        }
+
         return view
     }
 
