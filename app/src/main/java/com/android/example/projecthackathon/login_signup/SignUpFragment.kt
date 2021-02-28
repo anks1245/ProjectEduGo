@@ -120,6 +120,7 @@ class SignUpFragment : Fragment() {
             editor?.putString("userKey", email)
             editor?.putString("emailKey", email)
             editor?.putString("passKey", pass)
+            editor?.putString("userNameKey", name)
             editor?.apply()
 
             startActivity(Intent(context, MainActivity::class.java))
