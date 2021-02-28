@@ -21,7 +21,6 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity() {
 
 
-
     private lateinit var drawerLayout: DrawerLayout
     lateinit var sharedPreferences: SharedPreferences
     private lateinit var signImageView: ImageView
@@ -42,12 +41,12 @@ class MainActivity : AppCompatActivity() {
         val topAppBar: MaterialToolbar = findViewById(R.id.topAppBar)
 
         val navigationView: NavigationView = findViewById(R.id.navView)
-        topAppBar.setNavigationOnClickListener{
+        topAppBar.setNavigationOnClickListener {
             drawerLayout.open()
         }
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
-            when(menuItem.itemId) {
+            when (menuItem.itemId) {
                 R.id.signFragment -> {
                     sharedPreferences.edit().putString("emailKey", null).apply()
                     Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show()
@@ -63,16 +62,21 @@ class MainActivity : AppCompatActivity() {
         setCurrentFragment(homeFragment)
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
-                when (it.itemId) {
-                    R.id.home -> setCurrentFragment(homeFragment)
-                    R.id.job -> setCurrentFragment(jobFragment)
-                    R.id.message -> setCurrentFragment(messageFragment)
+            when (it.itemId) {
+                R.id.home -> setCurrentFragment(homeFragment)
+                R.id.job -> setCurrentFragment(jobFragment)
+                R.id.message -> {
+                    if (sharedPreferences.getString("emailKey", null).isNullOrEmpty())
+                        Toast.makeText(this, "Login first to use this feature", Toast.LENGTH_SHORT).show()
+                    else
+                        setCurrentFragment(messageFragment)
                 }
+            }
             true
         }
 
         signImageView.setOnClickListener {
-            startActivity(Intent(this, SignInUpActivity ::class.java))
+            startActivity(Intent(this, SignInUpActivity::class.java))
         }
 
 
