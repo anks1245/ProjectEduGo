@@ -7,3 +7,4 @@ package com.android.example.projecthackathon.helper
  const val GET_JOB_POST = "http://ankitapi.xyz/EduGo/v1/getAllJobs.php"
  const val JOB_SEARCH = "http://ankitapi.xyz/EduGo/v1/searchJobs.php"
 const val JOB_IMAGE = "http://ankitapi.xyz/EduGo/image/"
+ const val JOB_LIKE ="http://ankitapi.xyz/EduGo/v1/postlike.php"

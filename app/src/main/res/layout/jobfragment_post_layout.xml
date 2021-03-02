@@ -76,20 +76,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
+                <ToggleButton
                     android:id="@+id/job_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_margin="10dp"
-                    android:src="@drawable/ic_baseline_like"
+                    android:background="@drawable/ic_job_black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/job_like_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="00"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/job_like"
                     app:layout_constraintTop_toTopOf="parent" />

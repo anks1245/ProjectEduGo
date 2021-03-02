@@ -103,6 +103,7 @@ class JobsAndInternshipActivity : AppCompatActivity() {
 //        toast(jsonArray.length().toString())
             for( i in 0 until jsonArray.length()) {
                 jsonArray.getJSONObject(i).apply {
+                    val jobId = getString("job_upload_id")
                     val companyName = getString("company_name")
                     val jobName = getString("job_name")
                     Log.d("JobFrsagment", "on Response $i : $jobName")
@@ -115,6 +116,7 @@ class JobsAndInternshipActivity : AppCompatActivity() {
                     val jobApplied = getString("job_applied")
                     val jobUploadedAt = getString("job_uploaded_at")
                     val mJob = JobModel(
+                        jobId,
                         companyName,
                         jobName,
                         uName,

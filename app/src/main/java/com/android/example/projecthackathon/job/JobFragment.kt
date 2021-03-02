@@ -26,7 +26,7 @@ class JobFragment : Fragment() {
     private lateinit var recyclerView : RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var requestQueue: RequestQueue
-    private var jobArrayList : ArrayList<JobModel> = ArrayList()
+    private var jobArrayList2 : ArrayList<JobModel> = ArrayList()
     private lateinit var jobAdapter: JobAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,7 @@ class JobFragment : Fragment() {
         requestQueue = Volley.newRequestQueue(root?.context)
         getJobPost()
         swipeRefreshLayout.setOnRefreshListener {
-            jobArrayList.clear()
+            jobArrayList2.clear()
             getJobPost()
             swipeRefreshLayout.isRefreshing = false
         }
@@ -63,6 +63,7 @@ class JobFragment : Fragment() {
         context?.toast(jsonArray.length().toString())
         for( i in 0 until jsonArray.length()){
             jsonArray.getJSONObject(i).apply {
+                val jobId = getString("job_upload_id")
                 val companyName = getString("company_name")
                 val jobName = getString("job_name")
                 Log.d("JobFrsagment","on Response $i : $jobName")
@@ -75,6 +76,7 @@ class JobFragment : Fragment() {
                 val jobApplied = getString("job_applied")
                 val jobUploadedAt = getString("job_uploaded_at")
                 val mJob = JobModel(
+                    jobId,
                     companyName,
                     jobName,
                     uName,
@@ -86,9 +88,9 @@ class JobFragment : Fragment() {
                     jobApplied,
                     jobUploadedAt
                 )
-                jobArrayList.add(mJob)
+                jobArrayList2.add(mJob)
             }
-            jobAdapter = JobAdapter(jobArrayList)
+            jobAdapter = JobAdapter(jobArrayList2)
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
                 adapter = jobAdapter

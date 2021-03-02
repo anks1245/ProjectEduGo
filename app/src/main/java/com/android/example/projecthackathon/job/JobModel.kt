@@ -1,6 +1,7 @@
 package com.android.example.projecthackathon.job
 
-class JobModel(var companyName : String?,
+class JobModel( var jobid :String?,
+                var companyName : String?,
                 var jobName : String?,
                 var uname : String?,
                 var jobImg : String?,
