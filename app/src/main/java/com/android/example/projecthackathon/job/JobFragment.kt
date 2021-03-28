@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -28,6 +29,7 @@ class JobFragment : Fragment() {
     private lateinit var requestQueue: RequestQueue
     private var jobArrayList2 : ArrayList<JobModel> = ArrayList()
     private lateinit var jobAdapter: JobAdapter
+    private lateinit var progressBar : ProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,9 +39,12 @@ class JobFragment : Fragment() {
         recyclerView = root.findViewById(R.id.recyclerview_jobpost)
         swipeRefreshLayout = root.findViewById(R.id.swipetorefresh_job)
         requestQueue = Volley.newRequestQueue(root?.context)
+        progressBar = root.findViewById(R.id.progrressbar_jobpost)
         getJobPost()
+        progressBar.visibility = View.VISIBLE
         swipeRefreshLayout.setOnRefreshListener {
             jobArrayList2.clear()
+            progressBar.visibility = View.GONE
             getJobPost()
             swipeRefreshLayout.isRefreshing = false
         }
@@ -47,9 +52,11 @@ class JobFragment : Fragment() {
     }
 
     private fun getJobPost() {
+        progressBar.visibility = View.VISIBLE
         val stringRequest = StringRequest(
             Request.Method.POST, GET_JOB_POST ,
             Response.Listener { response->
+                progressBar.visibility = View.GONE
                 convertJson(response)
             },
             Response.ErrorListener { error->

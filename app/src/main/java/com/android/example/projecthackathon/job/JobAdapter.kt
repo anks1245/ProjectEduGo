@@ -22,6 +22,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class JobAdapter(var jobModelArrayList: ArrayList<JobModel>): RecyclerView.Adapter<JobAdapter.JobModelViewHolder>() {
+
     inner class JobModelViewHolder(itemView : View):RecyclerView.ViewHolder(itemView){
         var jobLikeCount : TextView = itemView.findViewById(R.id.job_like_count)
         var username: TextView = itemView.findViewById(R.id.user_name)
