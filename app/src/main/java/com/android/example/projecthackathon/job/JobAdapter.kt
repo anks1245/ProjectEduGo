@@ -32,7 +32,6 @@ class JobAdapter(var jobModelArrayList: ArrayList<JobModel>): RecyclerView.Adapt
         var skillsRequirement : TextView = itemView.findViewById(R.id.requirement)
         var jobLike : ToggleButton = itemView.findViewById(R.id.job_like)
 
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JobModelViewHolder {
